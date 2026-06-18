@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # Load Model
-model = joblib.load("model.pkl")
+model = joblib.load("files/model.pkl")
 
 
 # Custom CSS

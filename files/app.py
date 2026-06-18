@@ -12,6 +12,7 @@ st.set_page_config(
 # Load Model
 model = joblib.load("model.pkl")
 
+
 # Custom CSS
 st.markdown("""
 <style>

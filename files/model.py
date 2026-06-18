@@ -9,29 +9,20 @@ from sklearn.impute import SimpleImputer
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
 
-# ======================
-# LOAD DATA
-# ======================
+# Load Data
 df = pd.read_csv("laptop_data.csv")
 # Drop unwanted column
 df.drop("Unnamed: 0", axis=1, inplace=True)
 df = df.drop("Weight", axis=1)
 
-# ======================
-# CLEAN DATA
-# ======================
+# Data Clean
 
 df["Ram"] = df["Ram"].str.replace("GB", "", regex=False).astype(int)
-# ======================
-# FEATURES & TARGET
-# ======================
 
 X = df.drop("Price", axis=1)
 y = df["Price"]
 
-# ======================
-# SPLIT
-# ======================
+# Split
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
@@ -39,9 +30,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42
 )
 
-# ======================
-# PREPROCESSING
-# ======================
+# Preprocessing
 
 categorical_cols = X.select_dtypes(include=["object"]).columns
 numerical_cols = X.select_dtypes(include=["int64", "float64"]).columns
@@ -60,9 +49,8 @@ preprocessor = ColumnTransformer([
     ("num", numerical_transformer, numerical_cols)
 ])
 
-# ======================
-# MODEL
-# ======================
+# Model
+
 
 model = RandomForestRegressor(
     n_estimators=200,
@@ -74,15 +62,12 @@ pipeline = Pipeline([
     ("model", model)
 ])
 
-# ======================
-# TRAIN
-# ======================
+# Train
 
 pipeline.fit(X_train, y_train)
 
-# ======================
-# ACCURACY
-# ======================
+
+# Accuracy
 
 y_pred = pipeline.predict(X_test)
 
@@ -91,9 +76,8 @@ print("R2 Score:", round(r2_score(y_test, y_pred), 4))
 joblib.dump(pipeline, "model.pkl")
 print("Model Saved Successfully")
 
-# ======================
-# USER INPUT
-# ======================
+# User Input
+
 print("\nEnter Laptop Details\n")
 
 company = input("Company: ")

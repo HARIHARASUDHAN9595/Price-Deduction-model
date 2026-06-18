@@ -70,3 +70,7 @@ streamlit run app.py
 ## License
 
 MIT (or your preferred license)
+
+
+##You may use this link to direct to page
+https://price-deduction-model-wpr2dptrab5jwjzdkybvsk.streamlit.app/
